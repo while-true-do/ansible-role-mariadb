@@ -1,0 +1,94 @@
+---
+- name: Install MariaDB
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - MariaDB-server
+    - MariaDB-client
+
+- name: Install MySQL support for python
+  package:
+    name: MySQL-python
+    state: present
+
+- name: Configure /etc/my.cnf
+  template:
+    src: my-cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure /etc/my.cnf.d
+  file:
+    path: /etc/my.cnf.d
+    state: directory
+    mode: 0755
+
+- name: Configure /etc/my.cnf.d/server.cnf
+  template:
+    src: server-cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Start server MariaDB
+  systemd:
+    name: mariadb.service
+    state: started
+
+- name: Copy check script
+  copy:
+    src: check_mariadb.sh
+    dest: /tmp/check_mariadb.sh
+    owner: root
+    group: root
+    mode: 0770
+
+- name: Check if this is the first run
+  command: "/tmp/check_mariadb.sh"
+  register: wtd_mariadb_first_run
+
+- name: Set root password
+  mysql_user:
+    login_user: root
+    login_password: ''
+    user: root
+    password: '{{ wtd_mariadb_root_password }}'
+  when: wtd_mariadb_first_run.stdout == "0"
+
+- name: Remove anonymous users
+  mysql_user:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    name: ''
+    host_all: yes
+    state: absent
+
+- name: Disallow root login remotely for localhost
+  mysql_user:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    user: root
+    password: '{{ wtd_mariadb_root_password }}'
+    host: '{{ item }}'
+  with_items:
+    - '::1'
+    - localhost
+    - '127.0.0.1'
+    - '{{ ansible_fqdn }}'
+
+- name: Remove test database and access to it
+  mysql_db:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    name: test
+    state: absent
+
+- name: Enable service MariaDB and ensure it is not masked
+  systemd:
+    name: mariadb.service
+    enabled: yes
+    masked: no
