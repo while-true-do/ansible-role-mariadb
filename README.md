@@ -22,13 +22,13 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 
 **Used Modules**
 
--   [package](http://docs.ansible.com/ansible/latest/package_module.html)
--   [template](http://docs.ansible.com/ansible/latest/template_module.html)
--   [systemd](http://docs.ansible.com/ansible/latest/systemd_module.html)
--   [copy](http://docs.ansible.com/ansible/latest/copy_module.html)
 -   [command](http://docs.ansible.com/ansible/latest/command_module.html)
--   [mysql_user](http://docs.ansible.com/ansible/latest/mysql_user_module.html)
+-   [copy](http://docs.ansible.com/ansible/latest/copy_module.html)
 -   [mysql_db](http://docs.ansible.com/ansible/latest/mysql_db_module.html)
+-   [mysql_user](http://docs.ansible.com/ansible/latest/mysql_user_module.html)
+-   [package](http://docs.ansible.com/ansible/latest/package_module.html)
+-   [systemd](http://docs.ansible.com/ansible/latest/systemd_module.html)
+-   [template](http://docs.ansible.com/ansible/latest/template_module.html)
 
 **Modules requirements**
 -   MySQLdb (MySQL-python on CentOS 7)
