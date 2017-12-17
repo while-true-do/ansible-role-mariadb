@@ -1,0 +1,43 @@
+---
+- name: Check if MariaDB root user has a password
+  shell: mysql -u root
+  ignore_errors: true
+  register: wtd_mariadb_root_password_check
+  changed_when: wtd_mariadb_root_password_check.rc == 0
+  failed_when: wtd_mariadb_root_password_check.rc != 1 and wtd_mariadb_root_password_check.rc != 0
+
+- name: Set root password if not set
+  mysql_user:
+    login_user: root
+    login_password: ''
+    user: root
+    password: '{{ wtd_mariadb_root_password }}'
+  when: wtd_mariadb_root_password_check.rc == 0
+
+- name: Remove anonymous users
+  mysql_user:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    name: ''
+    host_all: yes
+    state: absent
+
+- name: Disallow root login remotely for localhost
+  mysql_user:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    user: root
+    password: '{{ wtd_mariadb_root_password }}'
+    host: '{{ item }}'
+  with_items:
+    - '::1'
+    - localhost
+    - '127.0.0.1'
+    - '{{ ansible_fqdn }}'
+
+- name: Remove test database and access to it
+  mysql_db:
+    login_user: root
+    login_password: '{{ wtd_mariadb_root_password }}'
+    name: test
+    state: absent

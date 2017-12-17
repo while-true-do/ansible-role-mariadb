@@ -23,11 +23,10 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 **Used Modules**
 
 -   [command](http://docs.ansible.com/ansible/latest/command_module.html)
--   [copy](http://docs.ansible.com/ansible/latest/copy_module.html)
 -   [mysql_db](http://docs.ansible.com/ansible/latest/mysql_db_module.html)
 -   [mysql_user](http://docs.ansible.com/ansible/latest/mysql_user_module.html)
 -   [package](http://docs.ansible.com/ansible/latest/package_module.html)
--   [systemd](http://docs.ansible.com/ansible/latest/systemd_module.html)
+-   [service](http://docs.ansible.com/ansible/latest/service_module.html)
 -   [template](http://docs.ansible.com/ansible/latest/template_module.html)
 
 **Modules requirements**
@@ -39,53 +38,34 @@ The variable files should be self-explanatary and pasted/linked here.
 Explanation should be done **in** the files, if needed.
 ```yaml
 # defaults/main.yml
-foo: bar
-```
+wtd_mariadb_packages:
+  - MariaDB-server
+  - MariaDB-client
 
-```yaml
-# vars/main.yml
-bar: foo
+wtd_mariadb_port: '3306'
+wtd_mariadb_bind_address: '0.0.0.0'
+
+wtd_mariadb_innodb_buffer_pool_size: '134217728' # 128MB
+wtd_mariadb_innodb_lru_scan_depth: '1024'
 ```
 
 ## Dependencies
-CHANGEME
-Describe, if other roles are needed and link them here.
-
-Dependency 1:
+This role depends on https://galaxy.ansible.com/while-true-do/repo-mariadb. You have to install the role:
 
 ```
 ansible-galaxy install -r requirements.yml
 ```
 
-- vars
-
-Dependency 2:
-
-- link
-- install
-- vars
-
 ## Example Playbook
-CHANGEME
 Simple Example:
 
 ```yaml
 - hosts: servers 
   roles:
-    - { role: while-true-do.CHANGEME }
-```
-
-Advanced Example:
-
-```yaml
-- hosts: servers 
-  roles:
-    - { role: while-true-do.CHANGEME, foo: bar, bar: foo }
+    - { role: while-true-do.mariadb }
 ```
 
 ## Testing
-CHANGEME
-Describe, how the role can be tested.
 All tests should be put in [test directory](./tests/).
 
 ## Contribute / Bugs
@@ -95,8 +75,8 @@ We are really happy, when somebody is joining the hard work. Please have a look
 at the links first.
 
 -   [Contribution Guidelines](./docs/CONTRIBUTING.md)
--   [Create an issue or Request](https://github.com/while-true-do/CHANGEME/issues)
--   [See who was contributing already](https://github.com/while-true-do/CHANGEME/graphs/contributors)
+-   [Create an issue or Request](https://github.com/while-true-do/mariadb/issues)
+-   [See who was contributing already](https://github.com/while-true-do/mariadb/graphs/contributors)
 
 ## License
 This work is licensed under a [BSD License](https://opensource.org/licenses/BSD-3-Clause).

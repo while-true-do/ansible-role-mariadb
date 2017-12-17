@@ -4,10 +4,9 @@
     name: '{{ item }}'
     state: present
   with_items:
-    - MariaDB-server
-    - MariaDB-client
+    - '{{ wtd_mariadb_packages }}'
 
-- name: Install MySQL support for python
+- name: Install ansible dependency MySQL-python
   package:
     name: MySQL-python
     state: present
@@ -19,12 +18,16 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - Restart MariaDB service
 
 - name: Configure /etc/my.cnf.d
   file:
     path: /etc/my.cnf.d
     state: directory
     mode: 0755
+  notify:
+    - Restart MariaDB service
 
 - name: Configure /etc/my.cnf.d/server.cnf
   template:
@@ -33,62 +36,15 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - Restart MariaDB service
 
-- name: Start server MariaDB
-  systemd:
-    name: mariadb.service
+- name: Start MariaDB and enable service
+  service:
+    name: mariadb
     state: started
-
-- name: Copy check script
-  copy:
-    src: check_mariadb.sh
-    dest: /tmp/check_mariadb.sh
-    owner: root
-    group: root
-    mode: 0770
-
-- name: Check if this is the first run
-  command: "/tmp/check_mariadb.sh"
-  register: wtd_mariadb_first_run
-
-- name: Set root password
-  mysql_user:
-    login_user: root
-    login_password: ''
-    user: root
-    password: '{{ wtd_mariadb_root_password }}'
-  when: wtd_mariadb_first_run.stdout == "0"
-
-- name: Remove anonymous users
-  mysql_user:
-    login_user: root
-    login_password: '{{ wtd_mariadb_root_password }}'
-    name: ''
-    host_all: yes
-    state: absent
-
-- name: Disallow root login remotely for localhost
-  mysql_user:
-    login_user: root
-    login_password: '{{ wtd_mariadb_root_password }}'
-    user: root
-    password: '{{ wtd_mariadb_root_password }}'
-    host: '{{ item }}'
-  with_items:
-    - '::1'
-    - localhost
-    - '127.0.0.1'
-    - '{{ ansible_fqdn }}'
-
-- name: Remove test database and access to it
-  mysql_db:
-    login_user: root
-    login_password: '{{ wtd_mariadb_root_password }}'
-    name: test
-    state: absent
-
-- name: Enable service MariaDB and ensure it is not masked
-  systemd:
-    name: mariadb.service
     enabled: yes
-    masked: no
+
+- name: Include mysql_secure_installation
+  include_tasks: mysql_secure_installation.yml
+

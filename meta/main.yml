@@ -1,7 +1,5 @@
-# CHANGEME: Fill in all needed information
 dependencies:
-  - src: https://github.com/while-true-do/ansible-role-repo-mariadb 
-#  - while-true-do.repo-mariadb
+  - while-true-do.repo-mariadb
 
 galaxy_info:
   author: while-true-do.org
