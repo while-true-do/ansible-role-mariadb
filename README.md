@@ -75,8 +75,8 @@ We are really happy, when somebody is joining the hard work. Please have a look
 at the links first.
 
 -   [Contribution Guidelines](./docs/CONTRIBUTING.md)
--   [Create an issue or Request](https://github.com/while-true-do/mariadb/issues)
--   [See who was contributing already](https://github.com/while-true-do/mariadb/graphs/contributors)
+-   [Create an issue or Request](https://github.com/while-true-do/ansible-role-mariadb/issues)
+-   [See who was contributing already](https://github.com/while-true-do/ansible-role-mariadb/graphs/contributors)
 
 ## License
 This work is licensed under a [BSD License](https://opensource.org/licenses/BSD-3-Clause).
