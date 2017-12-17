@@ -33,9 +33,7 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 -   MySQLdb (MySQL-python on CentOS 7)
 
 ## Role Variables
-CHANGEME
-The variable files should be self-explanatary and pasted/linked here.
-Explanation should be done **in** the files, if needed.
+
 ```yaml
 # defaults/main.yml
 wtd_mariadb_packages:
@@ -50,7 +48,8 @@ wtd_mariadb_innodb_lru_scan_depth: '1024'
 ```
 
 ## Dependencies
-This role depends on https://galaxy.ansible.com/while-true-do/repo-mariadb. You have to install the role:
+
+This role depends on <https://galaxy.ansible.com/while-true-do/repo-mariadb>. You have to install the role:
 
 ```
 ansible-galaxy install -r requirements.yml
