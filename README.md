@@ -40,12 +40,15 @@ wtd_mariadb_packages:
   - MariaDB-server
   - MariaDB-client
 
+wtd_mariadb_root_password: ''
 wtd_mariadb_port: '3306'
 wtd_mariadb_bind_address: '0.0.0.0'
 
 wtd_mariadb_innodb_buffer_pool_size: '134217728' # 128MB
 wtd_mariadb_innodb_lru_scan_depth: '1024'
 ```
+
+You have to generate a password for 'wtd_mariadb_root_password'.
 
 ## Dependencies
 
@@ -61,7 +64,7 @@ Simple Example:
 ```yaml
 - hosts: servers 
   roles:
-    - { role: while-true-do.mariadb }
+    - { role: while-true-do.mariadb, wtd_mariadb_root_password: 'PASSWORD' }
 ```
 
 ## Testing

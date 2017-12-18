@@ -13,6 +13,7 @@
     user: root
     password: '{{ wtd_mariadb_root_password }}'
   when: wtd_mariadb_root_password_check.rc == 0
+  failed_when: wtd_mariadb_root_password == ''
 
 - name: Remove anonymous users
   mysql_user:

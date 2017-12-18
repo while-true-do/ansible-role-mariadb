@@ -3,7 +3,7 @@ wtd_mariadb_packages:
   - MariaDB-server
   - MariaDB-client
 
-wtd_mariadb_root_password: '123456'
+wtd_mariadb_root_password: ''
 
 wtd_mariadb_port: '3306'
 wtd_mariadb_bind_address: '0.0.0.0'
