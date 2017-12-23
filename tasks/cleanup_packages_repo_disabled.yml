@@ -1,0 +1,20 @@
+---
+- name: Remove wrong MariaDB packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ wtd_mariadb_default_repo_packages }}"
+    - galera
+
+- name: Get if MariaDB-common is installed
+  yum:
+    list: MariaDB-common
+  register: wtd_mariadb_mariadb_common_installed
+
+- name: Swap dependent packages
+  command: yum -y swap MariaDB-common mariadb-libs
+  args:
+    warn: no
+  register: wtd_mariadb_swap_dependent_packages
+  when: wtd_mariadb_mariadb_common_installed.results | selectattr("yumstate", "match", "installed")| list | length == 1

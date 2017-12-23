@@ -1,0 +1,14 @@
+---
+- name: Remove wrong MariaDB packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ wtd_mariadb_default_packages }}"
+
+- name: Install MariaDB dependent packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ wtd_mariadb_default_repo_dependent_packages }}"
