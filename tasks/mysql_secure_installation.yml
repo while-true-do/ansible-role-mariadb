@@ -1,6 +1,6 @@
 ---
 - name: Check if MariaDB root user has a password
-  shell: mysql -u root
+  command: mysql -u root
   ignore_errors: true
   register: wtd_mariadb_root_password_check
   changed_when: wtd_mariadb_root_password_check.rc == 0
