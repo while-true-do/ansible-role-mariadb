@@ -1,15 +1,26 @@
 ---
-- name: Install MariaDB
-  package:
-    name: '{{ item }}'
-    state: present
-  with_items:
-    - '{{ wtd_mariadb_packages }}'
+- name: Select packages
+  include_tasks: select_packages.yml
+
+- name: Include cleanup MariaDB packages if repo-mariadb is enabled
+  include_tasks: cleanup_packages_repo_enabled.yml
+  when: wtd_repo_mariadb_enabled and wtd_repo_mariadb_added.changed
+
+- name: Include cleanup MariaDB packages if repo-mariadb is disabled
+  include_tasks: cleanup_packages_repo_disabled.yml
+  when: not wtd_repo_mariadb_enabled and wtd_repo_mariadb_removed.changed
 
 - name: Install ansible dependency MySQL-python
   package:
     name: MySQL-python
     state: present
+
+- name: Install MariaDB
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ wtd_mariadb_packages }}"
 
 - name: Configure /etc/my.cnf
   template:
@@ -41,7 +52,7 @@
 
 - name: Start MariaDB and enable service
   service:
-    name: mariadb
+    name: "{{ wtd_mariadb_service }}"
     state: started
     enabled: yes
 

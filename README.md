@@ -36,11 +36,24 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 
 ```yaml
 # defaults/main.yml
-wtd_mariadb_packages:
-  - MariaDB-server
-  - MariaDB-client
+wtd_mariadb_packages: []
+
+wtd_mariadb_default_packages:
+  - "mariadb"
+  - "mariadb-server"
+
+wtd_mariadb_default_repo_packages:
+  - "MariaDB-client"
+  - "MariaDB-server"
+
+wtd_mariadb_default_repo_dependent_packages:
+  - "MariaDB-common"
+  - "MariaDB-shared"
+
+wtd_mariadb_service: "mariadb"
 
 wtd_mariadb_root_password: ''
+
 wtd_mariadb_port: '3306'
 wtd_mariadb_bind_address: '0.0.0.0'
 

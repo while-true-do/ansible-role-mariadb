@@ -1,5 +1,5 @@
 ---
 - name: Restart MariaDB service
   service:
-    name: mariadb
+    name: "{{ wtd_mariadb_service }}"
     state: restarted

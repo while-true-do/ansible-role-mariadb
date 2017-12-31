@@ -1,0 +1,17 @@
+---
+- name: Set mariadb packages if repo-mariadb is enabled
+  set_fact:
+    wtd_mariadb_packages: "{{ wtd_mariadb_packages }} + [ '{{ item }}' ]"
+  with_items: "{{ wtd_mariadb_default_repo_packages }}"
+  when: wtd_repo_mariadb_enabled
+
+- name: Set mariadb packages if repo-mariadb is disabled
+  set_fact:
+    wtd_mariadb_packages: "{{ wtd_mariadb_packages }} + [ '{{ item }}' ]"
+  with_items: "{{ wtd_mariadb_default_packages }}"
+  when: not wtd_repo_mariadb_enabled
+
+- name: Set service name for MariaDB
+  set_fact:
+    wtd_mariadb_service: "mysql"
+  when: wtd_repo_mariadb_enabled and wtd_repo_mariadb_version == "5.5"
