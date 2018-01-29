@@ -1,0 +1,12 @@
+---
+
+- name: Create databases
+  mysql_db:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default(wtd_mariadb_databases_default_state) }}"
+    collation: "{{ item.collation | default(wtd_mariadb_databases_default_collation) }}"
+    encoding: "{{ item.encoding | default(wtd_mariadb_databases_default_encoding) }}"
+    login_user: root
+    login_password: "{{ wtd_mariadb_root_password }}"
+  with_items:
+    - "{{ wtd_mariadb_databases }}"

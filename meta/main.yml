@@ -1,5 +1,5 @@
 dependencies:
-  - while-true-do.repo-mariadb
+  - { role: while-true-do.repo-mariadb, when: wtd_mariadb_active_repo == "mariadb" }
 
 galaxy_info:
   author: while-true-do.org

@@ -1,10 +1,10 @@
 ---
 - name: Install MariaDB
   package:
-    name: '{{ item }}'
+    name: "{{ item }}"
     state: present
   with_items:
-    - '{{ wtd_mariadb_packages }}'
+    - "{{ wtd_mariadb_active_packages }}"
 
 - name: Install ansible dependency MySQL-python
   package:
@@ -48,3 +48,8 @@
 - name: Include mysql_secure_installation
   include_tasks: mysql_secure_installation.yml
 
+- name: Include databases
+  include_tasks: databases.yml
+
+- name: Include users
+  include_tasks: users.yml

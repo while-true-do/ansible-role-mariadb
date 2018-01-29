@@ -1,12 +1,31 @@
 ---
-wtd_mariadb_packages:
+wtd_mariadb_active_repo: "mariadb"
+
+wtd_mariadb_active_packages: []
+
+wtd_mariadb_packages_repo_mariadb:
   - MariaDB-server
   - MariaDB-client
 
-wtd_mariadb_root_password: ''
+wtd_mariadb_packages_rhel:
+  - mariadb-server
+  - mariadb
 
-wtd_mariadb_port: '3306'
-wtd_mariadb_bind_address: '0.0.0.0'
+wtd_mariadb_root_password: ""
 
-wtd_mariadb_innodb_buffer_pool_size: '134217728' # 128MB
-wtd_mariadb_innodb_lru_scan_depth: '1024'
+wtd_mariadb_port: "3306"
+wtd_mariadb_bind_address: "0.0.0.0"
+
+wtd_mariadb_innodb_buffer_pool_size: "134217728" # 128MB
+wtd_mariadb_innodb_lru_scan_depth: "1024"
+
+wtd_mariadb_databases: []
+wtd_mariadb_databases_default_encoding: "latin1"
+wtd_mariadb_databases_default_collation: "latin1_swedish_ci"
+wtd_mariadb_databases_default_state: "present"
+
+wtd_mariadb_users: []
+wtd_mariadb_users_default_state: "present"
+wtd_mariadb_users_default_priv: "*.*:USAGE"
+wtd_mariadb_users_default_update_password: "on_create"
+wtd_mariadb_users_default_encrypted_password: "no"
