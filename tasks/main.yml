@@ -1,13 +1,12 @@
 ---
 - name: Include correct package names
-  include_vars: "vars/{{ ansible_distribution }}.yml"
+  include_vars: "{{ ansible_distribution }}.yml"
   when: wtd_mariadb_repository == "default"
   tags:
     - mariadb
-  
-# NOTE: Can be changed later to dynamically integrate scl or other repos
+
 - name: Include correct upstream package names
-  include_vars: "vars/repo_mariadb.yml"
+  include_vars: repo_mariadb.yml
   when: wtd_mariadb_repository == "repo_mariadb"
   tags:
     - mariadb
@@ -19,9 +18,9 @@
   with_items: "{{ wtd_mariadb_packages }}"
   tags:
     - mariadb
-      
+
 - name: Include Configuration Tasks
-  include_tasks: "tasks/configure.yml"
+  include_tasks: configure.yml
 
 - name: Enable and Start MariaDB
   service:
@@ -32,4 +31,4 @@
     - mariadb
 
 - name: Include Secure Installation Tasks
-  include_tasks: "tasks/mysql_secure_installation.yml"
+  include_tasks: mysql_secure_installation.yml

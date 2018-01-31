@@ -4,7 +4,7 @@
   ignore_errors: true
   register: wtd_mariadb_root_password_check
   changed_when: wtd_mariadb_root_password_check.rc == 0
-  failed_when: wtd_mariadb_root_password_check.rc != 1 and 
+  failed_when: wtd_mariadb_root_password_check.rc != 1 and
                wtd_mariadb_root_password_check.rc != 0
 
 - name: Set root password if not set

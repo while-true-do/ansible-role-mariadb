@@ -1,5 +1,5 @@
 ---
 wtd_mariadb_packages:
-  - 'mariadb-server'
-  - 'mariadb'
-  - 'MySQL-python'
+  - "mariadb-server"
+  - "mariadb"
+  - "MySQL-python"
