@@ -1,55 +1,35 @@
 ---
+- name: Include correct package names
+  include_vars: "vars/{{ ansible_distribution }}.yml"
+  when: wtd_mariadb_repository == "default"
+  tags:
+    - mariadb
+  
+# NOTE: Can be changed later to dynamically integrate scl or other repos
+- name: Include correct upstream package names
+  include_vars: "vars/repo_mariadb.yml"
+  when: wtd_mariadb_repository == "repo_mariadb"
+  tags:
+    - mariadb
+
 - name: Install MariaDB
   package:
     name: "{{ item }}"
     state: present
-  with_items:
-    - "{{ wtd_mariadb_active_packages }}"
+  with_items: "{{ wtd_mariadb_packages }}"
+  tags:
+    - mariadb
+      
+- name: Include Configuration Tasks
+  include_tasks: "tasks/configure.yml"
 
-- name: Install ansible dependency MySQL-python
-  package:
-    name: MySQL-python
-    state: present
-
-- name: Configure /etc/my.cnf
-  template:
-    src: my-cnf.j2
-    dest: /etc/my.cnf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - Restart MariaDB service
-
-- name: Configure /etc/my.cnf.d
-  file:
-    path: /etc/my.cnf.d
-    state: directory
-    mode: 0755
-  notify:
-    - Restart MariaDB service
-
-- name: Configure /etc/my.cnf.d/server.cnf
-  template:
-    src: server-cnf.j2
-    dest: /etc/my.cnf.d/server.cnf
-    owner: root
-    group: root
-    mode: 0644
-  notify:
-    - Restart MariaDB service
-
-- name: Start MariaDB and enable service
+- name: Enable and Start MariaDB
   service:
     name: mariadb
     state: started
     enabled: yes
+  tags:
+    - mariadb
 
-- name: Include mysql_secure_installation
-  include_tasks: mysql_secure_installation.yml
-
-- name: Include databases
-  include_tasks: databases.yml
-
-- name: Include users
-  include_tasks: users.yml
+- name: Include Secure Installation Tasks
+  include_tasks: "tasks/mysql_secure_installation.yml"

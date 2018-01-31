@@ -1,31 +1,38 @@
 ---
-wtd_mariadb_active_repo: "mariadb"
-
-wtd_mariadb_active_packages: []
-
-wtd_mariadb_packages_repo_mariadb:
-  - MariaDB-server
-  - MariaDB-client
-
-wtd_mariadb_packages_rhel:
-  - mariadb-server
-  - mariadb
-
-wtd_mariadb_root_password: ""
-
-wtd_mariadb_port: "3306"
-wtd_mariadb_bind_address: "0.0.0.0"
-
-wtd_mariadb_innodb_buffer_pool_size: "134217728" # 128MB
-wtd_mariadb_innodb_lru_scan_depth: "1024"
-
-wtd_mariadb_databases: []
-wtd_mariadb_databases_default_encoding: "latin1"
-wtd_mariadb_databases_default_collation: "latin1_swedish_ci"
-wtd_mariadb_databases_default_state: "present"
-
-wtd_mariadb_users: []
-wtd_mariadb_users_default_state: "present"
-wtd_mariadb_users_default_priv: "*.*:USAGE"
-wtd_mariadb_users_default_update_password: "on_create"
-wtd_mariadb_users_default_encrypted_password: "no"
+# The variables below may be overwritten from /vars/*.yml, depending on your
+# distribution and choice of repository.
+#
+# root_password: You should always set a password!
+# 
+# repository:
+#   - default -> will use the distribution specific repository
+#   - repo_mariadb -> will use the official upstream repository
+#     there is also a dependency to while-true-do.repo-mariadb
+#
+# Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
+# 
+wtd_mariadb_repository: 'default'
+wtd_mariadb_packages:
+    - 'mariadb-server'
+    - 'mariadb'
+    - 'MySQL-python'
+# Config
+wtd_mariadb_root_password: ''
+wtd_mariadb_port: '3306'
+wtd_mariadb_bind_address: '127.0.0.1'
+wtd_mariadb_datadir: '/var/lib/mysql'
+wtd_mariadb_socket: '/var/lib/mysql/mysql.sock'
+wtd_mariadb_log_error: '/var/log/mariadb/mariadb.log'
+wtd_mariadb_pid_file: '/var/run/mariadb/mariadb.pid'
+wtd_mariadb_symbolic_links: '0'
+wtd_mariadb_character_set: 'utf8mb4'
+# Innodb
+wtd_mariadb_innodb_large_prefix: 'on'
+wtd_mariadb_innodb_file_format: 'barracuda'
+wtd_mariadb_innodb_file_per_table: 'true'
+wtd_mariadb_innodb_buffer_pool_size: '128M'
+# Query Cache
+wtd_mariadb_query_cache_type: '1'
+wtd_mariadb_query_cache_limit: '256K'
+wtd_mariadb_query_cache_min_res_unit: '2k'
+wtd_mariadb_query_cache_size: '64M'

@@ -1,3 +1,0 @@
----
-
-wtd_mariadb_active_packages: "{{ wtd_mariadb_packages_rhel if wtd_mariadb_active_repo == 'rhel' else wtd_mariadb_packages_repo_mariadb }}"

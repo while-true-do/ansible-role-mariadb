@@ -1,0 +1,5 @@
+---
+wtd_mariadb_packages:
+  - 'MariaDB-server'
+  - 'MariaDB-client'
+  - 'MySQL-python'
