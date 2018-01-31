@@ -10,4 +10,4 @@ echo "***  Syntax ***"
 ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
 echo "*** Linting ***"
-ansible-lint -Rv test.yml
+ansible-lint -Rv tests/test.yml

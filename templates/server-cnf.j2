@@ -11,39 +11,38 @@
 
 # this is only for the mysqld standalone daemon
 [mysqld]
-
-#
-# * Galera-related settings
-#
-[galera]
-# Mandatory settings
-#wsrep_on=ON
-#wsrep_provider=
-#wsrep_cluster_address=
-#binlog_format=row
-#default_storage_engine=InnoDB
-#innodb_autoinc_lock_mode=2
-#
-# Allow server to accept connections on all interfaces.
-#
-bind-address={{ wtd_mariadb_bind_address }}
+# Network
+# Default = local binding to prevent unknown security vectors
 port={{ wtd_mariadb_port }}
-#
-# Optional setting
-#wsrep_slave_threads=1
-#innodb_flush_log_at_trx_commit=0
+bind-address={{ wtd_mariadb_bind_address }}
 
+# Directories
+datadir={{ wtd_mariadb_datadir }}
+{% if wtd_mariadb_socket is defined %}
+socket={{ wtd_mariadb_socket }}
+{% endif %}
+
+# Symbolic links
+# Default = 0 to prevent assorted security risks
+symbolic-links={{ wtd_mariadb_symbolic_links }}
+
+# Character Sets
+character-set-server={{ wtd_mariadb_character_set }}
+
+# InnoDB Settings
+innodb_large_prefix={{ wtd_mariadb_innodb_large_prefix }}
+innodb_file_format={{ wtd_mariadb_innodb_file_format }}
+innodb_file_per_table={{ wtd_mariadb_innodb_file_per_table }}
 innodb_buffer_pool_size={{ wtd_mariadb_innodb_buffer_pool_size }}
-innodb_lru_scan_depth={{ wtd_mariadb_innodb_lru_scan_depth }}
+
+# Query Cache
+query_cache_type={{ wtd_mariadb_query_cache_type }}
+query_cache_limit={{ wtd_mariadb_query_cache_limit }}
+query_cache_min_res_unit={{ wtd_mariadb_query_cache_min_res_unit }}
+query_cache_size={{ wtd_mariadb_query_cache_size }}
+
 # this is only for embedded server
 [embedded]
 
-# This group is only read by MariaDB servers, not by MySQL.
-# If you use the same .cnf file for MySQL and MariaDB,
-# you can put MariaDB-only options here
+# this is only for MariaDB servers, not for MySQL
 [mariadb]
-
-# This group is only read by MariaDB-10.1 servers.
-# If you use the same .cnf file for MariaDB of different versions,
-# use this group for options that older servers don't understand
-[mariadb-10.1]

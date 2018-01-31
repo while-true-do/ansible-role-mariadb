@@ -23,8 +23,6 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 **Used Modules**
 
 -   [command](http://docs.ansible.com/ansible/latest/command_module.html)
--   [mysql_db](http://docs.ansible.com/ansible/latest/mysql_db_module.html)
--   [mysql_user](http://docs.ansible.com/ansible/latest/mysql_user_module.html)
 -   [package](http://docs.ansible.com/ansible/latest/package_module.html)
 -   [service](http://docs.ansible.com/ansible/latest/service_module.html)
 -   [template](http://docs.ansible.com/ansible/latest/template_module.html)
@@ -34,21 +32,75 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 
 ## Role Variables
 
+You have to set a password for 'wtd_mariadb_root_password'.
+
 ```yaml
 # defaults/main.yml
-wtd_mariadb_packages:
-  - MariaDB-server
-  - MariaDB-client
 
+# The variables below may be overwritten from /vars/*.yml, depending on your
+# distribution and choice of repository.
+#
+# root_password: You should always set a password!
+# 
+# repository:
+#   - default -> will use the distribution specific repository
+#   - repo_mariadb -> will use the official upstream repository
+#     there is also a dependency to while-true-do.repo-mariadb
+#
+# Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
+# 
+wtd_mariadb_repository: 'default'
+wtd_mariadb_packages:
+    - 'mariadb-server'
+    - 'mariadb'
+    - 'MySQL-python'
+# Config
 wtd_mariadb_root_password: ''
 wtd_mariadb_port: '3306'
-wtd_mariadb_bind_address: '0.0.0.0'
-
-wtd_mariadb_innodb_buffer_pool_size: '134217728' # 128MB
-wtd_mariadb_innodb_lru_scan_depth: '1024'
+wtd_mariadb_bind_address: '127.0.0.1'
+wtd_mariadb_datadir: '/var/lib/mysql'
+# setting a socket is possible, but not set per default
+# wtd_mariadb_socket: "/var/lib/mysql/mysql.sock"
+wtd_mariadb_symbolic_links: '0'
+wtd_mariadb_character_set: 'utf8mb4'
+# Innodb
+wtd_mariadb_innodb_large_prefix: 'on'
+wtd_mariadb_innodb_file_format: 'barracuda'
+wtd_mariadb_innodb_file_per_table: 'true'
+wtd_mariadb_innodb_buffer_pool_size: '128M'
+# Query Cache
+wtd_mariadb_query_cache_type: '1'
+wtd_mariadb_query_cache_limit: '256K'
+wtd_mariadb_query_cache_min_res_unit: '2k'
+wtd_mariadb_query_cache_size: '64M'
 ```
 
-You have to generate a password for 'wtd_mariadb_root_password'.
+Below files will be included conditional
+
+```yaml
+# vars/CentOS.yml
+wtd_mariadb_packages:
+  - 'mariadb-server'
+  - 'mariadb'
+  - 'MySQL-python'
+```
+
+```yaml
+# vars/RedHat.yml
+wtd_mariadb_packages:
+  - 'mariadb-server'
+  - 'mariadb'
+  - 'MySQL-python'
+```
+
+```yaml
+# vars/repo_mariadb.yml
+wtd_mariadb_packages:
+  - 'MariaDB-server'
+  - 'MariaDB-client'
+  - 'MySQL-python'
+
+```
 
 ## Dependencies
 

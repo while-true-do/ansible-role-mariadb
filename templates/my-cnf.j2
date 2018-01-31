@@ -1,11 +1,14 @@
 # {{ ansible_managed }}
-# 
-# This group is read both both by the client and the server
-# use it for options that affect everything
-#
-[client-server]
+[mysqld]
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
 
-#
-# include all files from the config directory
-#
+[client]
+default-character-set={{ wtd_mariadb_character_set }}
+
+[mysql]
+default-character-set={{ wtd_mariadb_character_set }}
+
 !includedir /etc/my.cnf.d

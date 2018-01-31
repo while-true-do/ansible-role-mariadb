@@ -1,0 +1,26 @@
+---
+- name: Configure /etc/my.cnf
+  template:
+    src: my-cnf.j2
+    dest: /etc/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart MariaDB
+
+- name: Configure /etc/my.cnf.d
+  file:
+    path: /etc/my.cnf.d
+    state: directory
+    mode: 0755
+
+- name: Configure /etc/my.cnf.d/server.cnf
+  template:
+    src: server-cnf.j2
+    dest: /etc/my.cnf.d/server.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart MariaDB
