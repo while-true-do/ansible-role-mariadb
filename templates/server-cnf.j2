@@ -18,9 +18,9 @@ bind-address={{ wtd_mariadb_bind_address }}
 
 # Directories
 datadir={{ wtd_mariadb_datadir }}
+{% if wtd_mariadb_socket is defined %}
 socket={{ wtd_mariadb_socket }}
-log-error={{wtd_mariadb_log_error }}
-pid-file={{ wtd_mariadb_pid_file }}
+{% endif %}
 
 # Symbolic links
 # Default = 0 to prevent assorted security risks
