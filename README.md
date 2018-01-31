@@ -23,8 +23,6 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 **Used Modules**
 
 -   [command](http://docs.ansible.com/ansible/latest/command_module.html)
--   [mysql_db](http://docs.ansible.com/ansible/latest/mysql_db_module.html)
--   [mysql_user](http://docs.ansible.com/ansible/latest/mysql_user_module.html)
 -   [package](http://docs.ansible.com/ansible/latest/package_module.html)
 -   [service](http://docs.ansible.com/ansible/latest/service_module.html)
 -   [template](http://docs.ansible.com/ansible/latest/template_module.html)
