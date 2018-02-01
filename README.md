@@ -59,8 +59,7 @@ wtd_mariadb_root_password: ''
 wtd_mariadb_port: '3306'
 wtd_mariadb_bind_address: '127.0.0.1'
 wtd_mariadb_datadir: '/var/lib/mysql'
-# setting a socket is possible, but not set per default
-# wtd_mariadb_socket: "/var/lib/mysql/mysql.sock"
+wtd_mariadb_socket: "/var/lib/mysql/mysql.sock"
 wtd_mariadb_symbolic_links: '0'
 wtd_mariadb_character_set: 'utf8mb4'
 # Innodb
