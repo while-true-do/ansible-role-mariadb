@@ -1,9 +1,11 @@
+[![Build Status](https://travis-ci.org/while-true-do/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/while-true-do/ansible-role-mariadb)
+
 # Ansible Role: MariaDB 
 | This role installs and configures MariaDB
 
 ## Motivation
 
-Installing MariaDB together with mysql_secure_installation
+Installing MariaDB together with "MySQL secure installation".
 
 ## Installation
 Install from [Ansible Galaxy](https://galaxy.ansible.com/while-true-do.mariadb)
@@ -20,15 +22,23 @@ git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-d
 
 ## Requirements
 
-**Used Modules**
+Used Modules
 
 -   [command](http://docs.ansible.com/ansible/latest/command_module.html)
 -   [package](http://docs.ansible.com/ansible/latest/package_module.html)
 -   [service](http://docs.ansible.com/ansible/latest/service_module.html)
 -   [template](http://docs.ansible.com/ansible/latest/template_module.html)
 
-**Modules requirements**
--   MySQLdb (MySQL-python on CentOS 7)
+Module requirements
+- MySQLdb (package MySQL-python on CentOS 7)
+
+## Dependencies
+
+This role depends on <https://galaxy.ansible.com/while-true-do/repo-mariadb>. You have to install the role:
+
+```
+ansible-galaxy install -r requirements.yml
+```
 
 ## Role Variables
 
@@ -101,14 +111,6 @@ wtd_mariadb_packages:
 
 ```
 
-## Dependencies
-
-This role depends on <https://galaxy.ansible.com/while-true-do/repo-mariadb>. You have to install the role:
-
-```
-ansible-galaxy install -r requirements.yml
-```
-
 ## Example Playbook
 Simple Example:
 
@@ -119,7 +121,15 @@ Simple Example:
 ```
 
 ## Testing
-All tests should be put in [test directory](./tests/).
+
+All tests are located in [test directory](./tests/).
+
+Basic testing:
+
+```
+bash ./tests/test-spelling.sh
+bash ./tests/test-ansible.sh
+```
 
 ## Contribute / Bugs
 
@@ -127,15 +137,18 @@ Thank you so much for considering to contribute. Every contribution helps us.
 We are really happy, when somebody is joining the hard work. Please have a look 
 at the links first.
 
+-   [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
 -   [Contribution Guidelines](./docs/CONTRIBUTING.md)
 -   [Create an issue or Request](https://github.com/while-true-do/ansible-role-mariadb/issues)
 -   [See who was contributing already](https://github.com/while-true-do/ansible-role-mariadb/graphs/contributors)
 
 ## License
+
 This work is licensed under a [BSD License](https://opensource.org/licenses/BSD-3-Clause).
 
 ## Author Information
 
-Blog: [blog.while-true-do.org](https://blog.while-true-do.org)
+Site: [while-true-do.org](https://while-true-do.org)
 
 Mail: [hello@while-true-do.org](mailto:hello@while-true-do.org)
+
