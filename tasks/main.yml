@@ -13,9 +13,8 @@
 
 - name: Install MariaDB
   package:
-    name: "{{ item }}"
+    name: "{{ wtd_mariadb_packages }}"
     state: present
-  with_items: "{{ wtd_mariadb_packages }}"
   tags:
     - mariadb
 
