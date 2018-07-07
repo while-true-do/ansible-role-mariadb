@@ -8,16 +8,16 @@
 Installing MariaDB together with "MySQL secure installation".
 
 ## Installation
-Install from [Ansible Galaxy](https://galaxy.ansible.com/while-true-do.mariadb)
+Install from [Ansible Galaxy](https://galaxy.ansible.com/while_true_do.mariadb)
 
 ```
-ansible-galaxy install while-true-do.mariadb
+ansible-galaxy install while_true_do.mariadb
 ```
 
 Install from [Github](https://github.com/while-true-do/ansible-role-mariadb)
 
 ```
-git clone https://github.com/while-true-do/ansible-role-mariadb.git while-true-do.mariadb
+git clone https://github.com/while-true-do/ansible-role-mariadb.git while_true_do.mariadb
 ```
 
 ## Requirements
@@ -34,7 +34,7 @@ Module requirements
 
 ## Dependencies
 
-This role depends on <https://galaxy.ansible.com/while-true-do/repo-mariadb>. You have to install the role:
+This role depends on <https://galaxy.ansible.com/while_true_do/repo-mariadb>. You have to install the role:
 
 ```
 ansible-galaxy install -r requirements.yml
@@ -55,7 +55,7 @@ You have to set a password for 'wtd_mariadb_root_password'.
 # repository:
 #   - default -> will use the distribution specific repository
 #   - repo_mariadb -> will use the official upstream repository
-#     there is also a dependency to while-true-do.repo-mariadb
+#     there is also a dependency to while_true_do.repo-mariadb
 #
 # Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
 # 
@@ -117,7 +117,7 @@ Simple Example:
 ```yaml
 - hosts: servers 
   roles:
-    - { role: while-true-do.mariadb, wtd_mariadb_root_password: 'PASSWORD' }
+    - { role: while_true_do.mariadb, wtd_mariadb_root_password: 'PASSWORD' }
 ```
 
 ## Testing

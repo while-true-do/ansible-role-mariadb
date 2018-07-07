@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - while-true-do.mariadb
+    - while_true_do.mariadb
