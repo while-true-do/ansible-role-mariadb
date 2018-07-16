@@ -2,6 +2,7 @@ dependencies:
   - { role: while_true_do.repo_mariadb, when: wtd_mariadb_repository == "repo_mariadb" }
 
 galaxy_info:
+  role_name: mariadb
   author: while-true-do.org
   description: This role installs and configures MariaDB
   company: while-true-do.org
