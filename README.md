@@ -55,7 +55,7 @@ You have to set a password for 'wtd_mariadb_root_password'.
 # repository:
 #   - default -> will use the distribution specific repository
 #   - repo_mariadb -> will use the official upstream repository
-#     there is also a dependency to while_true_do.repo-mariadb
+#     there is also a dependency to while_true_do.repo_mariadb
 #
 # Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
 # 
