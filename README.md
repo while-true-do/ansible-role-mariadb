@@ -34,7 +34,7 @@ Module requirements
 
 ## Dependencies
 
-This role depends on <https://galaxy.ansible.com/while_true_do/repo-mariadb>. You have to install the role:
+This role depends on <https://galaxy.ansible.com/while_true_do/repo_mariadb>. You have to install the role:
 
 ```
 ansible-galaxy install -r requirements.yml
