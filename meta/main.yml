@@ -6,7 +6,7 @@ galaxy_info:
   description: This role installs and configures MariaDB
   company: while-true-do.org
 
-    github_branch: master
+  github_branch: master
   license: BSD
 
   min_ansible_version: 2.2
