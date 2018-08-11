@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/while-true-do/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/while-true-do/ansible-role-mariadb)
 
-# Ansible Role: MariaDB 
+# Ansible Role: MariaDB
 | This role installs and configures MariaDB
 
 ## Motivation
@@ -51,14 +51,14 @@ You have to set a password for 'wtd_mariadb_root_password'.
 # distribution and choice of repository.
 #
 # root_password: You should always set a password!
-# 
+#
 # repository:
 #   - default -> will use the distribution specific repository
 #   - repo_mariadb -> will use the official upstream repository
 #     there is also a dependency to while_true_do.repo_mariadb
 #
 # Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
-# 
+#
 wtd_mariadb_repository: 'default'
 wtd_mariadb_packages:
     - 'mariadb-server'
@@ -115,7 +115,7 @@ wtd_mariadb_packages:
 Simple Example:
 
 ```yaml
-- hosts: servers 
+- hosts: servers
   roles:
     - { role: while_true_do.mariadb, wtd_mariadb_root_password: 'PASSWORD' }
 ```
@@ -134,7 +134,7 @@ bash ./tests/test-ansible.sh
 ## Contribute / Bugs
 
 Thank you so much for considering to contribute. Every contribution helps us.
-We are really happy, when somebody is joining the hard work. Please have a look 
+We are really happy, when somebody is joining the hard work. Please have a look
 at the links first.
 
 -   [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
