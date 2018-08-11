@@ -3,14 +3,14 @@
 # distribution and choice of repository.
 #
 # root_password: You should always set a password!
-# 
+#
 # repository:
 #   - default -> will use the distribution specific repository
 #   - repo_mariadb -> will use the official upstream repository
 #     there is also a dependency to while-true-do.repo-mariadb
 #
 # Also some common best practices are applied like innodb tuning, activating query cache and setting default charset to utf8m4
-# 
+#
 wtd_mariadb_repository: "default"
 wtd_mariadb_packages:
     - "mariadb-server"

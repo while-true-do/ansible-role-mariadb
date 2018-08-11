@@ -1,12 +1,12 @@
 dependencies:
-  - { role: while-true-do.repo-mariadb, when: wtd_mariadb_repository == "repo_mariadb" }
+  - { role: while_true_do.repo_mariadb, when: wtd_mariadb_repository == "repo_mariadb" }
 
 galaxy_info:
+  role_name: mariadb
   author: while-true-do.org
   description: This role installs and configures MariaDB
   company: while-true-do.org
 
-  issue_tracker_url: https://github.com/while-true-do/ansible-role-mariadb/issues
   github_branch: master
   license: BSD
 

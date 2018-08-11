@@ -1,7 +1,6 @@
 ---
-# TODO: Build better testing for multiple containers and os support
 language: python
-python: 
+python:
   - "2.7"
   - "3.6"
 
@@ -12,6 +11,8 @@ addons:
   apt:
     packages:
     - python-pip
+    - aspell
+    - aspell-en
 
 install:
   # Install ansible
@@ -22,16 +23,17 @@ install:
   # Check ansible version
   - ansible --version
 
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../' >ansible.cfg
-
   # Link github repo to ansible-galaxy name
-  - ln -s  $PWD ../while-true-do.mariadb
+  - ln -s  $PWD ../while_true_do.mariadb
 
 # Run the tests
 script:
-  - chmod +x tests/test.sh
-  - tests/test.sh
+  - chmod +x tests/test-ansible.sh
+  - tests/test-ansible.sh
+  - chmod +x tests/test-spelling.sh
+  - tests/test-spelling.sh
+  - chmod +x tests/test-whitespace.sh
+  - tests/test-whitespace.sh
 
 notifications:
   webhooks:
